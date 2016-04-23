@@ -6,7 +6,7 @@ var router = express.Router();
 var request = require('request');
 
 /* GET users listing. */
-router.get('/image/:imageUrl', function(req, res, next) {
+router.get('/image/', function(req, res, next) {
     console.log("request received");
 
     // Set the headers
@@ -21,7 +21,7 @@ router.get('/image/:imageUrl', function(req, res, next) {
         url: 'https://api.projectoxford.ai/emotion/v1.0/recognize',
         method: 'POST',
         headers: headers,
-        json: { "url": req.params.imageUrl }
+        json: { "url": "https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xpl1/v/t1.0-9/12715270_1196180507076818_6586415939809965548_n.jpg?oh=92c75195f20e9a188304dbe8e26833b1&oe=57ABE939" }
     }
 
     // Start the request
