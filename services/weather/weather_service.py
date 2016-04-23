@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!/usr/bin/python
 from flask import Flask, jsonify, abort, json
 
 app = Flask(__name__)
