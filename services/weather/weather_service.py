@@ -11,7 +11,7 @@ data = json.loads(file_information)
 
 @app.route('/cached/<location>/<start_time>/<end_time>', methods=['GET'])
 def get_task(location, start_time, end_time):
-    return jsonify(result=data[0])
+    return jsonify(result=data)
 
 @app.route('/')
 def examples():
