@@ -4,8 +4,8 @@ from flask import Flask, jsonify, abort, json
 app = Flask(__name__)
 
 
-filename = '04_2016_dump.json'
-file_information = (open(filename, 'r')).read()
+filename = 'data.json'
+file_information = (open(filename, 'r')).read().replace( '\x00', '' )
 data = json.loads(file_information)
 
 
