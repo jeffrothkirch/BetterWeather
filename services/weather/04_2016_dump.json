@@ -1,7 +1,7 @@
 [
     {
         "cloudcover": "6",
-        "date": "2016-4-1",
+        "date": "2016-04-01",
         "events": "Rain",
         "max_dew_pointf": "58",
         "max_gust_speedmph": "30",
@@ -26,7 +26,7 @@
     },
     {
         "cloudcover": "7",
-        "date": "2016-4-2",
+        "date": "2016-04-02",
         "events": "Rain",
         "max_dew_pointf": "45",
         "max_gust_speedmph": "20",
@@ -51,7 +51,7 @@
     },
     {
         "cloudcover": "4",
-        "date": "2016-4-3",
+        "date": "2016-04-03",
         "events": "Rain",
         "max_dew_pointf": "44",
         "max_gust_speedmph": "45",
@@ -76,7 +76,7 @@
     },
     {
         "cloudcover": "8",
-        "date": "2016-4-4",
+        "date": "2016-04-04",
         "events": "Rain-Snow",
         "max_dew_pointf": "41",
         "max_gust_speedmph": "25",
@@ -101,7 +101,7 @@
     },
     {
         "cloudcover": "2",
-        "date": "2016-4-5",
+        "date": "2016-04-05",
         "events": "",
         "max_dew_pointf": "21",
         "max_gust_speedmph": "31",
@@ -126,7 +126,7 @@
     },
     {
         "cloudcover": "1",
-        "date": "2016-4-6",
+        "date": "2016-04-06",
         "events": "",
         "max_dew_pointf": "38",
         "max_gust_speedmph": "36",
@@ -151,7 +151,7 @@
     },
     {
         "cloudcover": "5",
-        "date": "2016-4-7",
+        "date": "2016-04-07",
         "events": "Rain",
         "max_dew_pointf": "52",
         "max_gust_speedmph": "34",
@@ -176,7 +176,7 @@
     },
     {
         "cloudcover": "4",
-        "date": "2016-4-8",
+        "date": "2016-04-08",
         "events": "",
         "max_dew_pointf": "36",
         "max_gust_speedmph": "29",
@@ -201,7 +201,7 @@
     },
     {
         "cloudcover": "5",
-        "date": "2016-4-9",
+        "date": "2016-04-09",
         "events": "Rain",
         "max_dew_pointf": "33",
         "max_gust_speedmph": "19",
@@ -226,7 +226,7 @@
     },
     {
         "cloudcover": "1",
-        "date": "2016-4-10",
+        "date": "2016-04-10",
         "events": "",
         "max_dew_pointf": "27",
         "max_gust_speedmph": "24",
@@ -251,7 +251,7 @@
     },
     {
         "cloudcover": "6",
-        "date": "2016-4-11",
+        "date": "2016-04-11",
         "events": "Rain",
         "max_dew_pointf": "45",
         "max_gust_speedmph": "22",
@@ -276,7 +276,7 @@
     },
     {
         "cloudcover": "3",
-        "date": "2016-4-12",
+        "date": "2016-04-12",
         "events": "Rain",
         "max_dew_pointf": "54",
         "max_gust_speedmph": "30",
@@ -301,7 +301,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-13",
+        "date": "2016-04-13",
         "events": "",
         "max_dew_pointf": "34",
         "max_gust_speedmph": "25",
@@ -326,7 +326,7 @@
     },
     {
         "cloudcover": "1",
-        "date": "2016-4-14",
+        "date": "2016-04-14",
         "events": "",
         "max_dew_pointf": "35",
         "max_gust_speedmph": "20",
@@ -351,7 +351,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-15",
+        "date": "2016-04-15",
         "events": "",
         "max_dew_pointf": "35",
         "max_gust_speedmph": "16",
@@ -376,7 +376,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-16",
+        "date": "2016-04-16",
         "events": "",
         "max_dew_pointf": "35",
         "max_gust_speedmph": "20",
@@ -401,7 +401,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-17",
+        "date": "2016-04-17",
         "events": "",
         "max_dew_pointf": "36",
         "max_gust_speedmph": "15",
@@ -426,7 +426,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-18",
+        "date": "2016-04-18",
         "events": "",
         "max_dew_pointf": "35",
         "max_gust_speedmph": "22",
@@ -451,7 +451,7 @@
     },
     {
         "cloudcover": "1",
-        "date": "2016-4-19",
+        "date": "2016-04-19",
         "events": "",
         "max_dew_pointf": "41",
         "max_gust_speedmph": "27",
@@ -476,7 +476,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-20",
+        "date": "2016-04-20",
         "events": "",
         "max_dew_pointf": "30",
         "max_gust_speedmph": "21",
@@ -501,7 +501,7 @@
     },
     {
         "cloudcover": "0",
-        "date": "2016-4-21",
+        "date": "2016-04-21",
         "events": "",
         "max_dew_pointf": "47",
         "max_gust_speedmph": "21",
@@ -526,7 +526,7 @@
     },
     {
         "cloudcover": "2",
-        "date": "2016-4-22",
+        "date": "2016-04-22",
         "events": "",
         "max_dew_pointf": "55",
         "max_gust_speedmph": "18",
@@ -551,7 +551,7 @@
     },
     {
         "cloudcover": "7",
-        "date": "2016-4-23",
+        "date": "2016-04-23",
         "events": "Rain",
         "max_dew_pointf": "61",
         "max_gust_speedmph": "20",

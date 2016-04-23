@@ -2,6 +2,7 @@
 import fileinput
 import csv
 import json
+import time
 
 def shape_data(dimensions, row):
     obj = {}
@@ -29,9 +30,20 @@ def transform_csv_to_object(filename):
     csvreader = csv.reader(csvfile, delimiter=',')
     header = csvreader.next()
     transformed_header = transform_header(header)
+
     line_data = [line for line in csvreader]
-    shaped_data = [shape_data(transformed_header, line) for line in line_data]
-    return shaped_data
+    raw_data = [shape_data(transformed_header, line) for line in line_data]
+
+    data = [transform_date_field(d) for d in raw_data]
+
+    return data
+
+def transform_date_field(data_entry):
+    date_value = data_entry['date']
+    parsed_time = time.strptime(date_value, "%Y-%m-%d")
+    formmated_time = time.strftime("%Y-%m-%d", parsed_time)
+    data_entry['date'] = formmated_time
+    return data_entry
 
 def main():
     filename='April2016.csv'

@@ -19,7 +19,7 @@ Example of returned data:
   "result": [
     {
       "cloudcover": "6",
-      "date": "2016-4-1",
+      "date": "2016-04-01",
       "events": "Rain",
       "max_dew_pointf": "58",
       "max_gust_speedmph": "30",
@@ -44,7 +44,7 @@ Example of returned data:
     },
     {
       "cloudcover": "7",
-      "date": "2016-4-2",
+      "date": "2016-04-02",
       "events": "Rain",
       "max_dew_pointf": "45",
       "max_gust_speedmph": "20",
@@ -68,5 +68,6 @@ Example of returned data:
       "winddirdegrees": "67"
     }
   ]
+}
 ```
 
