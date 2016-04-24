@@ -3,12 +3,12 @@ API:
 
 route: `/`
 -----
-example: `!curl localhost:8084`
+example: `curl localhost:8084`
 
 
 route: `/filter`
 ----
-example: `!curl -F "links=[\"https://img.grouponcdn.com/deal/5EXVDNMDEe1mtyEK6Pgp/ZC-1057x634/v1/c700x420.jpg\", \"http://st.hzcdn.com/fimgs/4d8155e104ef5d51_2301-w500-h666-b0-p0--transitional-bedroom.jpg\"]" localhost:8084/filter`
+example: `curl -F "links=[\"https://img.grouponcdn.com/deal/5EXVDNMDEe1mtyEK6Pgp/ZC-1057x634/v1/c700x420.jpg\", \"http://st.hzcdn.com/fimgs/4d8155e104ef5d51_2301-w500-h666-b0-p0--transitional-bedroom.jpg\"]" localhost:8084/filter`
 
 ```
 {
@@ -20,7 +20,7 @@ example: `!curl -F "links=[\"https://img.grouponcdn.com/deal/5EXVDNMDEe1mtyEK6Pg
 
 route: `/classify`
 ----
-example: `!curl -F "links=[\"https://img.grouponcdn.com/deal/5EXVDNMDEe1mtyEK6Pgp/ZC-1057x634/v1/c700x420.jpg\", \"http://st.hzcdn.com/fimgs/4d8155e104ef5d51_2301-w500-h666-b0-p0--transitional-bedroom.jpg\"]" localhost:8084/classify`
+example: `curl -F "links=[\"https://img.grouponcdn.com/deal/5EXVDNMDEe1mtyEK6Pgp/ZC-1057x634/v1/c700x420.jpg\", \"http://st.hzcdn.com/fimgs/4d8155e104ef5d51_2301-w500-h666-b0-p0--transitional-bedroom.jpg\"]" localhost:8084/classify`
 
 
 ```
