@@ -27,6 +27,50 @@ def transform_header(header):
     lower_case_header = [transform_element(x) for x in custom_header]
     return lower_case_header
 
+def get_descriptor(data_entry):
+    event_value = data_entry['events']
+    
+    mapping = {'Fog' : 'overcast',
+               'Fog-Rain' : 'raining',
+               'Fog-Rain-Snow' :'raining-snowing',
+               'Fog-Snow' : 'snowing',
+               'Rain' : 'raining',
+               'Rain-Snow' : 'raining-snowing',
+               'Snow' : 'snowing',
+               'Thunderstorm' : 'thunder'
+            }      
+
+    thunder_raining_threshold = 0.3
+
+    value = mapping.get(event_value,'')
+
+    if value:
+        return value
+
+    if value == 'thunder':
+        if is_number(data_entry['precipitationin']) and float(data_entry['precipitationin']) < thunder_raining_threshold:
+            value = 'thunder'
+        else:
+            value = 'thunder-raining'
+
+    if value  == '':
+        if is_number(data_entry['precipitationin']) and float(data_entry['precipitationin']) > 0.2:
+            value = 'raining'
+        elif is_number(data_entry['mean_wind_speedmph']) and float(data_entry['mean_wind_speedmph']) > 8.0:
+            value = 'very-windy'
+        elif is_number(data_entry['cloudcover']) and float(data_entry['cloudcover']) > 6:
+            value = 'overcast'
+        elif is_number(data_entry['cloudcover']) and float(data_entry['cloudcover']) >= 3: 
+            value = 'sunny-cloudy'
+        else:
+            value = 'sunny'
+
+    return value
+
+def shape_descriptors(data_entry):
+    data_entry['events'] = get_descriptor(data_entry)
+    return data_entry
+
 def transform_csv_to_object(filename):
     csvfile = open(filename, 'rb')
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -40,7 +84,7 @@ def transform_csv_to_object(filename):
     raw_data = [shape_data(transformed_header, line) for line in line_data]
 
     data = [transform_date_field(d) for d in raw_data]
-
+    data = [shape_descriptors(d) for d in raw_data]
     return data
 
 def transform_date_field(data_entry):    
@@ -62,5 +106,11 @@ def main():
 
     print json.dumps(all_data, sort_keys=True, indent=4, separators=(',', ': '))    
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 if __name__ == '__main__':
     main()
