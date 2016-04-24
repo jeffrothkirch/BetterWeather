@@ -1,0 +1,132 @@
+@import 'slick';
+@import 'fonts';
+
+.photos {
+  font-size: 0;
+  background: black;
+  .thumb {
+    display: inline-block;
+    width: 33.3333vw;
+    height: 33.3333vw;
+    flex: 1;
+    background-position: center center;
+    background-size: cover;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.image { visibility: hidden; } /* prevent a flash of giant image before the image is wrapped by jQuery */
+
+.image-wrap {
+  /* whatever the dimensions you want the "cropped" image to be */
+  height: 33.3333vw;
+  width: 33.3333vw;
+  overflow: hidden;
+  display: inline-block;
+
+  cursor: pointer;
+}
+
+
+.image-wrap img.square {
+      visibility: visible;
+      width: 100%;
+ }
+
+ .image-wrap img.portrait {
+      visibility: visible;
+      width: 100%;
+      height: auto;
+ }
+
+ .image-wrap img.landscape {
+      visibility: visible;
+      height: 100%;
+      width: auto;
+ }
+
+// TODO HACK
+ .image {
+  // @extend .image-wrap img.landscape;
+  visibility: visible;
+      height: 100%;
+      width: auto;
+ }
+
+.image-wrap-two {
+  > * {
+    display: block;
+  }
+}
+
+// TODO UNHACK
+// .image:not(.portrait),
+// .image:not(.landscape) {
+//   display: none;
+// }
+
+
+
+.image-wrap {
+    display: block;
+    overflow: hidden;
+}
+
+.image-wrap img {
+    display: block; /* Otherwise it keeps some space around baseline */
+    min-width: 100%;    /* Scale up to fill container width */
+    min-height: 100%;   /* Scale up to fill container height */
+    -ms-interpolation-mode: bicubic; /* Scaled images look a bit better in IE now */
+}
+
+// -------- arrows ----------
+.photos {
+  position: relative;
+}
+
+.post-photo {
+  position: relative;
+
+  .post-image-wrap {
+    width: 100%;
+  }
+}
+
+.arrow {
+  @extend .al;
+
+  position: absolute;
+  top: 50%;
+  font-size: 70px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 0;
+  transform: translateY(-11px);
+  z-index: 2;
+  cursor: pointer;
+
+  &.prev-photo {
+    left: 0;
+    padding-left: 10px;
+  }
+  &.next-photo {
+    right: 0;
+    padding-right: 10px;
+  }
+}
+
+.past-days {
+  position: relative;
+  .arrow {
+    color: #ddd;
+    margin-top: 45px;
+  }
+}
+
+.post-image-caption {
+  @extend .proxima;
+  line-height: 1.4;
+  text-align: justify;
+}
