@@ -37,7 +37,7 @@ def examples():
 
 @app.route('/classify', methods=['POST'])
 def classify():
-    links_string=request.form['links']
+    links_string=request.form.getlist('links[]')
     links = json.loads(links_string)
     data = fetch_data(links)
 
@@ -45,7 +45,7 @@ def classify():
 
 @app.route('/filter', methods=['POST'])
 def filter():
-    links_string=request.form['links']
+    links_string=request.form.getlist('links[]')
     links = json.loads(links_string)
     data = fetch_data(links)
 
@@ -58,8 +58,7 @@ def filter():
 
 @app.route('/outdoorness', methods=['POST'])
 def outdoorness():
-    links_string=request.form['links']
-    links = json.loads(links_string)
+    links=request.form.getlist('links[]')
     data = fetch_data(links)
 
     results = {}
