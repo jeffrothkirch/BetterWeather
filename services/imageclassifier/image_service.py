@@ -7,7 +7,7 @@ import os, shutil
 import hashlib
 import shutil
 import os.path
-
+from operator import itemgetter
 
 import os
 print os.environ['HOME']
@@ -52,9 +52,22 @@ def filter():
     results = []
     for i, link in enumerate(links):
         if (is_outdoors(data['images'][i])):
+            link =data['images'][i]['image']
             results.append(link)
     return jsonify(result=results)
 
+@app.route('/outdoorness', methods=['POST'])
+def outdoorness():
+    links_string=request.form['links']
+    links = json.loads(links_string)
+    data = fetch_data(links)
+
+    results = {}
+    for i, link in enumerate(links):
+        if (is_outdoors(data['images'][i])):
+            link = data['images'][i]['image']
+            results[link] = calculate_outdoorness(data['images'][i])
+    return jsonify(result=results)
 
 def is_outdoors(data_entry):
     # names = ['Outdoors', 'Burning', 'Racquet_Sport', 'Bat_Sport', 'Team_Field_Sport', 'Team_Indoor_Sport', 'Team_Sport', 'Track_and_Field', 'Boating', 'Power_Boating', 'Rowing', 'Swimming', 'Water_Sport', 'Ice_Sport', 'Skiing', 'Snow_Sport', 'Winter_Sport', 'Sports_Field', 'Sports_Track', 'Urban_Scene', 'Nature_Scene', 'Water_Scene', 'Winter_Scene', 'Outdoors', 'Sky_Scene', 'Flower', 'Wild_Fire', 'Earthquake', 'Flood', 'Storm', 'Camping', 'Wedding', 'Concert', 'Adventure_Sport', 'Climbing', 'Land_Sailing', 'Air_Sport', 'Ballooning', 'Hand_Gliding', 'Camel_Racing', 'Dog_Racing', 'Equestrian', 'Horce_Racing', 'Polo', Golf', ;Greco_Roman_Wrestling', 'Mud_Wrestling', 'Cycling', 'Fishing', 'Rollerskating', 'Skateboarding', 'American_Football', 'Football', 'Soccer', 'Rugby', 'Field_Hocky', 'Track', 'Jet_Skiing', 'Crew', 'Sailing', 'Windsurfing', 'Cliff_Diving', 'Sledding', 'Tobagganing', 'Ski_Jumping']
@@ -125,6 +138,13 @@ def is_outdoors(data_entry):
         return len(filtered_scores) > 0
     return False
     
+def calculate_outdoorness(data_entry):
+    if ('scores' in data_entry):
+        scores = [(d['classifier_id'], d['score']) for d in data_entry['scores']]
+        filtered_scores = [s  for s in scores if s[0].lower() in nature_set and s[1] > 0.6]
+
+        return max([f[1] for f in filtered_scores])
+    return 0.0
 
 def delete_folder(path):
     for the_file in os.listdir(path):
