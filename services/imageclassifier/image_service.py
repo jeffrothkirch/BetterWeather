@@ -63,10 +63,10 @@ def outdoorness():
     data = fetch_data(links)
 
     results = {}
-    for i, link in enumerate(links):
-        if (is_outdoors(data['images'][i])):
-            link = data['images'][i]['image']
-            results[link] = calculate_outdoorness(data['images'][i])
+    for i, link in enumerate(links):    
+        link = data['images'][i]['image']
+        results[link] = calculate_outdoorness(data['images'][i])
+
     return jsonify(result=results)
 
 def is_outdoors(data_entry):
@@ -141,8 +141,10 @@ def is_outdoors(data_entry):
 def calculate_outdoorness(data_entry):
     if ('scores' in data_entry):
         scores = [(d['classifier_id'], d['score']) for d in data_entry['scores']]
-        filtered_scores = [s  for s in scores if s[0].lower() in nature_set and s[1] > 0.6]
+        filtered_scores = [s  for s in scores if s[0].lower() in nature_set]
 
+        if len(filtered_scores) == 0:
+            return 0.0
         return max([f[1] for f in filtered_scores])
     return 0.0
 
