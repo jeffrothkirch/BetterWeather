@@ -1,0 +1,221 @@
+@import 'fonts';
+
+$tile-height: 150px;
+$bt: 75px;
+
+// colors
+$green: #A3BB8A;
+$red: #C88988;
+
+.clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+    // Fixes Opera/contenteditable bug:
+    // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+    line-height: 0;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+#dashboard {
+  margin: auto;
+  background: white;
+  min-height: 100vh;
+  @extend .din-pro;
+}
+
+.location {
+  @extend .typewriter;
+  padding: 25px 0 10px;
+  text-align: center;
+  color: #c1c1c1;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+}
+
+.day-night {
+  font-size: 0;
+  text-align: center;
+  .day, .night {
+    overflow: hidden;
+    display: inline-block;
+    height: $tile-height;
+    width: 50%;
+    position: relative;
+  }
+}
+
+.is-day {
+  background: #D6F2FF;
+  color: #6C6C6C;
+}
+.is-night {
+  background: #3D4558;
+  color: #E8E8E8;
+}
+
+.description {
+  @extend .clearfix;
+  display: inherit;
+  font-size: 0;
+  height: 110px;
+  margin-top: -34px;
+  margin-left: -40px;
+
+  > * {
+    display: inline-block;
+    height: 100%;
+    float: left;
+  }
+}
+
+.temperature {
+  @extend .typewriter;
+  font-weight: 400;
+  padding-left: 10px;
+  font-size: 36px;
+  line-height: $tile-height + 16px;
+}
+
+.condition {
+  display: inherit;
+  height: 20px;
+  width: 100%;
+  font-size: 18px;
+  margin-top: 14px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: lighter;
+}
+
+.night {
+  color: #C9C9C9;
+}
+
+.day .condition {
+  color: #4F4F4F;
+}
+
+// ---------- hi lo -------------
+$ht: 75px;
+
+.hi-lo {
+  background: #FFF5D3;
+
+  .hi {
+    color: $green;
+  }
+
+  .lo {
+    padding-left: 10px;
+    color: $red;
+  }
+
+  strong {
+    font-weight: medium;
+    padding-left: 25px;
+  }
+}
+
+.hi-lo, .precipitation {
+  height: $ht;
+  line-height: $ht;
+  letter-spacing: 3px;
+  font-weight: lighter;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.precipitation {
+  background: #F7F7F7;
+  color: #ADADAD;
+}
+
+.sentiment {
+  color: #707070;
+  font-size: 1.25em;
+  font-weight: lighter;
+  padding: 50px 25px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.days-like-text {
+  font-size: 28px;
+  font-weight: lighter;
+  color: #707070;
+  text-align: center;
+}
+
+.past-days {
+  position: relative;
+  margin-top: $bt;
+}
+.daystamp {
+  display: flex;
+  opacity: 0.85;
+  margin: 0 60px;
+  @extend .typewriter;
+  color: #4A90E2;
+  text-align: left;
+  padding-bottom: 25px;
+  padding-left: 10px;
+
+  // position: absolute;
+  // z-index: 2;
+}
+
+section.picture {
+  padding: 35px 0 15px;
+}
+
+section.photo-detail {
+  margin-top: 20px;
+  .wi-sm {
+    height: 70px;
+  }
+  .wi-sm .wi {
+    top: -72px;
+  }
+}
+
+.sundry {
+  background: #F8FF75;
+}
+.mild {
+  background: #6DB2E3;
+}
+.chilly {
+  background: #C6E4F9;
+}
+.cold {
+  background: #AAF8FF;
+}
+.freezing {
+  background: #EFF5F9;
+}
+.rainy {
+  background: #BDBDBD;
+}
+
+section.signout {
+  margin-top: 50px;
+  padding: $bt 0 20px;
+  text-align: center;
+  background: #fafafa;
+  a {
+    text-decoration: none;
+    color: #ddd;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.25em;
+  }
+}

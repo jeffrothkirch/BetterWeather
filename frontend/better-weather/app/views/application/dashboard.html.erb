@@ -1,0 +1,179 @@
+<style>
+  body {
+    background: #ddd;
+  }
+</style>
+
+<div class="container" id="dashboard" ng-controller="DashboardCtrl">
+  <section class="location" ng-class="{day: isDaytime, night: !isDaytime}">New York, New York</section>
+  <section class="picture" ng-class="{day: isDaytime, night: !isDaytime}">
+    <div class="wi-wrapper">
+      <span class="wi sunny-cloudy"></span>
+    </div>
+  </section>
+  <section class="day-night" style="display: none;">
+    <article class="is-day">
+      <div class="description">
+        <span class="wi-sm">
+          <span class="wi snowing"></span>
+        </span>
+        <span class="temperature">71°</span>
+      </div>
+      <div class="condition">light snow</div>
+    </article>
+    <article class="is-night">
+      <div class="description">
+        <span class="wi-sm">
+          <span class="wi raining"></span>
+        </span>
+        <span class="temperature">71°</span>
+      </div>
+      <div class="condition">heavy rain</div>
+    </article>
+  </section>
+  <!-- hi-lo -->
+  <section class="hi-lo">
+    <span class="hi">hi:<strong>75</strong></span>
+    <span class="lo">lo:<strong>35</strong></span>
+  </section>
+  <!-- TODO: changing greys based on % -->
+  <section class="precipitation">precipitation: 60%</section>
+
+  <section class="sentiment">
+    <div class="prompt">Based on similar days in the past,</div>
+    <div>It’s probably gonna be a <strong>very pleasant</strong> day for you</div>
+  </section>
+  <div class="days-like-text">Days that felt like this</div>
+  <section class="photo-detail"
+    ng-class="{
+      sundry: avgTemp > 75,
+      mild: avgTemp <= 75 && avgTemp > 60,
+      chilly: avgTemp <= 60 && avgTemp > 30,
+      cold: avgTemp <= 30 && avgTemp > 15,
+      freezing: avgTemp < 15
+    }">
+    <div class="wi-sm">
+      <span class="wi sunny-cloudy"></span>
+    </div>
+  </section>
+  <section class="photos">
+    <span id="prev-photo" class="arrow prev-photo"><</span>
+    <div id="photos-slides">
+      <div class="image-wrap-two"
+        ng-repeat="pw in pastWeather">
+        <span class="image-wrap" ng-click="expandPastWeather()">
+          <img class="image"
+            src="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-0/p600x600/13006673_10206308884669249_2596166473509757752_n.jpg?oh=00ea7c091b4ee659c42024375eda1e0b&oe=57AA5ABD" alt="Broken Image">
+        </span>
+        <span class="image-wrap">
+          <img class="image"
+            src="https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/12961499_10206184681404245_8675805908834344655_n.jpg?oh=0ccef624eea59f1838d8f24d63ff6143&oe=57BC62F6" alt="Broken Image">
+        </span>
+        <span class="image-stamp">4/5/15</span>
+      </div>
+        <div class="image-wrap-two">
+          <span class="image-wrap">
+            <img class="image"
+              src="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/12376354_10206177992717032_3551949571276223325_n.jpg?oh=87fc385e8ea99a30a6d6221c234bc304&oe=57784D5F" alt="Broken Image">
+          </span>
+          <span class="image-wrap">
+            <img class="image"
+              src="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/12524331_10205979800602353_2751742160520262014_n.jpg?oh=1b29fe0acd5c46aa6b76f3da870cd31e&oe=57B20DE0" alt="Broken Image">
+          </span>
+          <span class="image-stamp">2/15/14</span>
+        </div>
+        <div class="image-wrap-two">
+          <span class="image-wrap">
+            <img class="image"
+              src="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xlt1/v/t1.0-9/12814086_10205935677019291_3541709042581372853_n.jpg?oh=c554562f6dfbd7a65f6facd459c8f67b&oe=57BBA2D4" alt="Broken Image">
+          </span>
+          <span class="image-wrap">
+            <img class="image"
+              src="https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xlp1/v/t1.0-9/12717531_10205798079019427_2762629494019126147_n.jpg?oh=05988299a1063c1356e332a492c2c0c8&oe=57B3AF6B" alt="Broken Image">
+          </span>
+          <span class="image-stamp">4/14/15</span>
+        </div>
+      <% end %>
+    </div>
+    <span id="next-photo" class="arrow next-photo">></span>
+  </section>
+  <!-- past days -->
+  <section class="past-days">
+    <span id="prev-post" class="arrow prev-photo"><</span>
+    <div id="posts-slides">
+      <div class="day">
+        <div class="daystamp">
+          <span class="source-logo">
+            <%= image_tag 'instagram-icon-64x64.png' %>
+          </span>
+          <span class="source-meta">
+            <span class="source-date">
+              March 16, 2015
+            </span>
+            <div class="source-ago">
+              1 year ago
+            </div>
+          </span>
+        </div>
+        <div class="post-photo">
+          <div class="post-image-wrap">
+            <%= image_tag 'https://scontent-yyz1-1.xx.fbcdn.net/v/t1.0-9/12961499_10206184681404245_8675805908834344655_n.jpg?oh=0ccef624eea59f1838d8f24d63ff6143&oe=57BC62F6' %>
+          </div>
+          <div class="post-image-caption">
+            {{test}} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit inculpa qui officia deserunt mollit anim id est laborum.
+          </div>
+        </div>
+      </div>
+      <div class="day">
+        <div class="daystamp">
+          <span class="source-logo">
+            <%= image_tag 'instagram-icon-64x64.png' %>
+          </span>
+          <span class="source-meta">
+            <span class="source-date">
+              February 16, 2014
+            </span>
+            <div class="source-ago">
+              2 years ago
+            </div>
+          </span>
+        </div>
+        <div class="post-photo">
+          <div class="post-image-wrap">
+            <%= image_tag 'https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/12032115_10204704285710037_6221966814084646552_n.jpg?oh=8b44638d7261b7db64d2726690ec4ace&oe=57B6F6D9' %>
+          </div>
+          <div class="post-image-caption">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+          </div>
+        </div>
+      </div>
+      <div class="day">
+        <div class="daystamp">
+          <span class="source-logo">
+            <%= image_tag 'instagram-icon-64x64.png' %>
+          </span>
+          <span class="source-meta">
+            <span class="source-date">
+              March 29, 2012
+            </span>
+            <div class="source-ago">
+              4 years ago
+            </div>
+          </span>
+        </div>
+        <div class="post-photo">
+          <div class="post-image-wrap">
+            <%= image_tag 'https://scontent-yyz1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/1604766_10201623932343128_1985662308718128403_n.jpg?oh=e345ad0179f705c29c7826d7dd0cc67a&oe=57BBF40B' %>
+          </div>
+          <div class="post-image-caption">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
+          </div>
+        </div>
+      </div>
+    </div>
+    <span id="next-post" class="arrow next-photo">></span>
+  </section>
+  <section class="signout">
+    <%= link_to "Sign Out", signout_path %>
+  </section>
+</div>

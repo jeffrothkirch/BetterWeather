@@ -1,0 +1,165 @@
+$x11: -397px;
+$x12: -820px;
+$x13: -1248px;
+$x14: -1677px;
+
+$y11: -226px;
+$y12: -204px;
+$y13: -250px;
+$y14: -204px;
+
+// $x11: 161px;
+// $x12: 285px;
+
+// $x21: 342px;
+// $x22: 480px;
+
+// $x31: 517px;
+// $x32: 662px;
+
+// $x41: 680px;
+// $x42: 850px;
+
+// $y42: 670px;
+// $y41: 561px;
+
+// $y32: 519px;
+// $y31: 397px;
+
+// $y11: -226px;
+// $y12: -204px;
+// $y13: -250px;
+// $y14: -204px;
+
+.wiwi {
+  img {
+    width: 100%;
+  }
+}
+
+.wi-wrapper {
+  overflow: hidden;
+  width: 156px;
+  height: 116px;
+  margin: auto;
+}
+.wi {
+  background: url(/assets/weather-icons-set-61be41f5325b783be1f1a3dd2a7a64929cb407e18d76e3fe220e43e3c865ea5c.png);
+  height: 256px;
+  width: 264px;
+  display: inline-block;
+
+  // default
+  transform: scale(0.5, 0.5) translate(-50%, -50%);
+}
+
+// EXAMPLE: <span class="wi sunny"></span>
+// -- row 1 ---
+.sunny {
+  background-position: $x11 $y11;
+}
+
+.sunny-rainy {
+  background-position: $x12 $y12;
+  height: 276px;
+}
+
+.overcast {
+  background-position: $x13 $y13;
+  height: 175px;
+  width: 285px;
+}
+
+.sunny-cloudy {
+  background-position: $x14 $y14;
+  height: 231px;
+  width: 306px;
+}
+
+// -- row 2 ---
+.raining {
+  background-position: -386px -591px;
+  width: 286px;
+  height: 240px;
+}
+.thunder {
+  background-position: -828px -591px;
+  width: 286px;
+  height: 267px;
+}
+.cloudy-overcast {
+  background-position: -1239px -585px;
+  width: 299px;
+  height: 218px;
+}
+.night-cloudy {
+  background-position: -1677px -512px;
+  width: 299px;
+  height: 290px;
+}
+// -- row 3 --
+.thunder-raining {
+  background-position: -399px -966px;
+  width: 286px;
+  height: 258px;
+}
+.snowing {
+  background-position: -835px -970px;
+  width: 286px;
+  height: 267px;
+  margin-top: -6px;
+}
+.raining-snowing {
+  background-position: -1240px -951px;
+  width: 301px;
+  height: 296px;
+}
+.rainbow-cloudy {
+  background-position: -1633px -954px;
+  width: 408px;
+  height: 296px;
+}
+// -- row 4 ---
+.hot-temp {
+  background-position: -407px -1356px;
+  width: 120px;
+  height: 234px;
+}
+.cold-temp {
+  background-position: -551px -1356px;
+  width: 120px;
+  height: 234px;
+
+}
+
+.umbrella {
+  background-position: -823px -1347px;
+  width: 328px;
+  height: 246px;
+}
+.very-windy {
+  background-position: -1322px -1347px;
+  width: 273px;
+  height: 254px;
+}
+.tornado {
+  background-position: -1701px -1341px;
+  width: 273px;
+  height: 268px;
+}
+
+// climate tiles
+.wi-sm {
+  width: 110px;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+
+  .wi {
+    transform: scale(0.2, 0.2) translate(-20%, -20%);
+    position: relative;
+    right: 51%;
+    top: -22px;
+  }
+}
