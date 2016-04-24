@@ -25,10 +25,10 @@ months = range(1,13)
 year = 2016
 dummy_day = 23
 
-write_dir = 'csv'
+write_dir = 'legacy_csv'
 
-start_date = datetime.date(2011, 4, 23)
-end_date = datetime.date(2016, 4, 23)
+start_date = datetime.date(1994, 4, 23)
+end_date = datetime.date(2011, 3, 23)
 
 foo = raw_input("Pulling data from %s to %s. Press any key to continue." % (start_date, end_date))
 
