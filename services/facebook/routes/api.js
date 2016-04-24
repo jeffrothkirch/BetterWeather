@@ -96,8 +96,16 @@ router.get('/getCode', function(req, res, next) {
             //res.send(response.body);
             var obj =  JSON.parse(response.body);
             var token = obj.access_token;
-            request('https://api.instagram.com/v1/media/search?q=demonstration&lat=40.7128&lng=74.0059&distance=100000&min_timestamp=1272168000&max_timestamp=1461556800&access_token=' + token, function (error, response, body) {
+            //var url = 'https://api.instagram.com/v1/media/search?q=demonstration&lat=40.7128&lng=74.0059&distance=100000&min_timestamp=1272168000&max_timestamp=1461556800&access_token=' + token;
+            var url = 'https://api.instagram.com/v1/users/self/media/recent/?count=200&access_token=' + token;
+            request(url,function (error, response, body) {
                 if (!error && response.statusCode == 200) {
+                    console.log('got pics!');
+                    res.send(response.body);
+                }
+
+                if (response.statusCode != 200) {
+                    console.log(response);
                     res.send(response.body);
                 }
             });
