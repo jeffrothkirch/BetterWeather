@@ -97,13 +97,18 @@ def transform_date_field(data_entry):
 
 def main():
     targetdir = 'csv'
+    seconddir = 'legacy_csv'
 
     all_data = []
     for file in listdir(targetdir):
         filename = "%s/%s" % (targetdir, file)
         shaped_data = transform_csv_to_object(filename)
         all_data.extend(shaped_data)
-
+    for file in listdir(seconddir):
+        filename = "%s/%s" % (seconddir, file)
+        shaped_data = transform_csv_to_object(filename)
+        all_data.extend(shaped_data)
+        
     print json.dumps(all_data, sort_keys=True, indent=4, separators=(',', ': '))    
 
 def is_number(s):
