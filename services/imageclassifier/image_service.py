@@ -110,10 +110,37 @@ def fetch_data(links):
     # transform them back to links
     abort(403)
 
+
 def get_index(entry, i):
     for j,e in enumerate(entry):
         if str(e['image']) == "%s.%s" % (i, 'jpg'):
             return j
+
+def is_outdoors(data_entry):
+    # names = ['Outdoors', 'Burning', 'Racquet_Sport', 'Bat_Sport', 'Team_Field_Sport', 'Team_Indoor_Sport', 'Team_Sport', 'Track_and_Field', 'Boating', 'Power_Boating', 'Rowing', 'Swimming', 'Water_Sport', 'Ice_Sport', 'Skiing', 'Snow_Sport', 'Winter_Sport', 'Sports_Field', 'Sports_Track', 'Urban_Scene', 'Nature_Scene', 'Water_Scene', 'Winter_Scene', 'Outdoors', 'Sky_Scene', 'Flower', 'Wild_Fire', 'Earthquake', 'Flood', 'Storm', 'Camping', 'Wedding', 'Concert', 'Adventure_Sport', 'Climbing', 'Land_Sailing', 'Air_Sport', 'Ballooning', 'Hand_Gliding', 'Camel_Racing', 'Dog_Racing', 'Equestrian', 'Horce_Racing', 'Polo', Golf', ;Greco_Roman_Wrestling', 'Mud_Wrestling', 'Cycling', 'Fishing', 'Rollerskating', 'Skateboarding', 'American_Football', 'Football', 'Soccer', 'Rugby', 'Field_Hocky', 'Track', 'Jet_Skiing', 'Crew', 'Sailing', 'Windsurfing', 'Cliff_Diving', 'Sledding', 'Tobagganing', 'Ski_Jumping']
+    if ('scores' in data_entry):
+        scores = [(d['classifier_id'], d['score']) for d in data_entry['scores']]
+        filtered_scores = [s  for s in scores if s[0].lower() in nature_set and s[1] > 0.6]
+
+        return len(filtered_scores) > 0
+    return False
+    
+
+def delete_folder(path):
+    for the_file in os.listdir(path):
+        file_path = os.path.join(path, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            #elif os.path.isdir(file_path): shutil.rmtree(file_path)
+        except Exception as e:
+            print(e)
+
+def delete_file(path):
+    try:
+        os.remove(path)
+    except OSError:
+        pass
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8084, debug=True)
