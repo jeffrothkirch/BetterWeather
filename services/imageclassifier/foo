@@ -1,5 +1,0 @@
-{ "classifiers":[
-		{"classifier_id":"Indoors","name":"Indoors"},
-		{"classifier_id":"Outdoors","name":"Outdoors"},
-	]
-}
