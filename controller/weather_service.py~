@@ -1,0 +1,47 @@
+import datetime
+import urllib2
+import json
+from weather_logic import weather_logic
+
+WeatherServicePort = 8081
+
+def ToString(date):
+    return date.strftime('%Y-%m-%d')
+    
+def GetWeather(location, date):
+    datestring = ToString(date)
+    url = 'localhost:8081/cached/'+location+'/'+datestring+'/'+datestring
+    r = urllib2.urlopen("http://localhost:8081/cached/new_york_city/2016-04-22/2015-04-22").read()
+    return convert_to_desired(json.loads(r))
+
+
+def GetSimilarDates(location, weather, numDates):
+    startdate = datetime.today() - datetime.timedelta(years=10)
+    startDateString = ToString(startdate)
+    dateString = ToString(datetime.today)
+    url = 'localhost:8081/cached/'+location+'/'+ startDateString + '/' + dateString
+    r = requests.get(url)
+    allDates = json.loads(r.content)  # list of dictionaries having Date, High, Low, Descriptor
+    rankedDates = weather_logic.RankDates
+    return rankedDates[:numDates]
+
+def convert_to_desired(response):
+    convertedEntries = []
+    oldFormat = response['result']
+    for date in oldFormat:
+        converted = {}
+        converted['date'] = date['date']
+        converted['descriptor'] = date['events']
+        converted['low'] = tryfloat(date['min_temperaturef'])
+        converted['high'] = tryfloat(date['max_temperaturef'])
+        converted['precipitation'] = tryfloat(date['precipitationin'])
+        converted['cloudcover'] = tryfloat(date['cloudcover'])
+        convertedEntries.append(converted)
+    return convertedEntries
+
+def tryfloat(value):
+    try:
+        return float(value)
+    except ValueError:
+        return 0
+

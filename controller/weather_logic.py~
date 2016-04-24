@@ -1,0 +1,62 @@
+import datetime
+import math
+
+
+class weather_logic:
+
+    descriptDict = { 
+        'sunny':{'sunniness':1, 'precipitation':0, 'fluffiness':0, 'wetness':0},
+                'partially sunny':{'sunniness':.7, 'precipitation':0, 'fluffiness':0, 'wetness':0},
+                'partially cloudy':{'sunniness':4, 'precipitation':0, 'fluffiness':0, 'wetness':0},
+                'cloudy':{'sunniness':.1, 'precipitation':0, 'fluffiness':0, 'wetness':0},
+                'overcast':{'sunniness':0, 'precipitation':0, 'fluffiness':0, 'wetness':0},
+                'drizzle':{'sunniness':.1, 'precipitation':.2, 'fluffiness':0.5, 'wetness':1},
+                'showers':{'sunniness':.2, 'precipitation':.1, 'fluffiness':.5, 'wetness':1},
+                'light rain':{'sunniness':.1, 'precipitation':.5, 'fluffiness':.5, 'wetness':1},
+                'rain':{'sunniness':0, 'precipitation':.8, 'fluffiness':.5, 'wetness':1},
+                'heavy rain':{'sunniness':0, 'precipitation':1, 'fluffiness':.5, 'wetness':1},
+                'flurries':{'sunniness':.2, 'precipitation':.1, 'fluffiness':1, 'wetness':0},
+                'light snow':{'sunniness':.1, 'precipitation':.3, 'fluffiness':1, 'wetness':0},
+                'snow':{'sunniness':0, 'precipitation':0.8, 'fluffiness':1, 'wetness':0},
+                'heavy snow':{'sunniness':0, 'precipitation':1, 'fluffiness':1, 'wetness':0},
+                'blizzard':{'sunniness':0, 'precipitation':.1, 'fluffiness':1, 'wetness':0},
+                'hail':{'sunniness':.1, 'precipitation':1, 'fluffiness':0, 'wetness':0},
+                'sleet':{'sunniness':.2, 'precipitation':.5, 'fluffiness':.5, 'wetness':.5},
+                'wintery mix':{'sunniness':.1, 'precipitation':.5, 'fluffiness':.4, 'wetness':.8}
+    }
+    categories = ['sunniness', 'precipitation', 'fluffiness', 'wetness']
+
+
+    def RankDates(self, currentDateWeather, historicalWeather):
+        for historicalEntry in historicalWeather:
+            historicalEntry['closeness'] = compare_dates(currentDateWeather, historicalEntry)
+        return sorted(historicalWeather, key = lambda entry : entry['closeness'])
+
+
+    def compare_dates(self, currentDateWeather, otherDate):
+        curHigh = currentDateWeather['high']
+        curLow = currentDateWeather['low']
+        curDesc = currentDateWeather['descriptor']
+        oldLow = otherDate['low']
+        oldHigh = otherDate['high']
+        oldDesc = otherDate['descriptor']
+        dist = get_squared_dist(curHigh,oldHigh)
+        dist += get_squared_dist(curLow, oldLow)
+        dist += get_descript_dist(curDesc, oldDesc)
+        return dist
+
+        
+    def get_squared_dist(self, value1, value2):
+        return math.pow(value1 - value2, 2)
+
+    def get_descript_dist(self, descriptor1, descriptor2):
+        val1 = descriptDict[descriptor1]
+        val2 = descriptDict[descriptor2]
+        dist = get_squared_dist(val1, val2, 'sunniness')
+        dist += get_squared_dist(val1, val2, 'precipitation')
+        dist += get_squared_dist(val1, val2, 'fluffiness')
+        dist += get_squared_dist(val1, val2, 'wetness')
+        return dist
+
+    def get_descript_dist_sub(self, entry1, entry2, category):
+        return get_squared_dist(entry1[category], entry2[category])

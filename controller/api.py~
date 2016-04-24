@@ -1,0 +1,41 @@
+from flask import Flask, request
+from flask_restful import Resource, Api
+from datetime import timedelta, date
+import json
+
+app = Flask(__name__)
+api = Api(app)
+
+
+def get_weather(city_name, date):
+        return {'temperature':72, 'descriptor':'sunny'}
+def get_similar(location, weather):
+        return [{'date':date.today(), 'weather':'sunny'}, {'date':date.today() - timedelta(1), 'weather':'sunny'}]  
+
+class FindCurrentWeather(Resource):
+        def GetCurrentWeather(self, request):
+                location = request.form['Location']
+                weather = get_weather(location, date.today())
+                return (location, weather, str(date.today()))
+
+        def put(self):
+                return json.dumps(self.GetCurrentWeather(request))
+                                
+
+
+class FindHistoricalWeather(Resource):
+        def GetMatchingWeather(request):
+                location = request.form['Location']
+                weather = get_weather(location, date.today())
+                dates = get_similar(location, weather)
+                return (city_name, dates)
+        def put(self):
+                return GetMatchingWeather(request)
+                                                                                     
+
+
+api.add_resource(FindCurrentWeather, "/FindCurrentWeather")
+api.add_resource(FindHistoricalWeather, "/FindMatchingDates")
+
+if __name__ == '__main__':
+                app.run(debug=True)
