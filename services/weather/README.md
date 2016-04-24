@@ -70,4 +70,6 @@ Example of returned data:
   ]
 }
 ```
+Events
 
+`{'','Fog','Fog-Rain','Fog-Rain-Snow','Fog-Snow','Rain','Rain-Snow','Snow','Thunderstorm'}`
