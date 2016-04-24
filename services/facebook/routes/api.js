@@ -121,7 +121,8 @@ router.get('/getPics/', function(req, res, next) {
     console.log('getting pics');
     var token = '';
     //var url = 'https://api.instagram.com/v1/tags/crookedspaces/media/recent/?access_token=16741082.1b07669.121a338d0cbe4ff6a5e04543158a4f82&lat=40.7128&lng=74.0059&distance=100000&min_timestamp=1272168000&max_timestamp=1461556800';
-    var url = 'https://api.instagram.com/v1/users/4940705/media/recent?access_token=4940705.5b9e1e6.03fdfd5d30994efd983465720e7883a0';
+    //var url = 'https://api.instagram.com/v1/users/4940705/media/recent?access_token=4940705.5b9e1e6.03fdfd5d30994efd983465720e7883a0';
+    var url =  'https://api.instagram.com/v1/users/18555911/media/recent?access_token=18555911.5b9e1e6.82f0f5988d614676b2afe8f7042fdd76&count=1000';
 
     request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
