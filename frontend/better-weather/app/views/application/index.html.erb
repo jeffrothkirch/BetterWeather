@@ -1,0 +1,46 @@
+<div class="container" id="login">
+  <% flash.each do |type, message| %>
+    <div class="flash <%= type %>">
+      <%= message %>
+    </div>
+  <% end %>
+  <div class="login-container">
+  <div class="logo-lg proxima">
+    <div class="wi-wrapper">
+      <span class="wi sunny-cloudy"></span>
+    </div>
+    <h1>Better Weather</h1>
+  </div>
+  <div class="sign-in">
+    <a href="/auth/instagram/callback">
+      <span class="icon-wrapper"><%= image_tag 'instagram-icon-64x64.png' %></span>
+      Sign in with Instagram
+    </a>
+  </div>
+  </div>
+</div>
+
+<!-- risks
+oversubscribed?
+trajectory
+swarming
+integrations missed? -->
+
+<!-- <span class="wi night-cloudy" ></span> -->
+  <!-- <span class="wi hot-temp" ></span>
+  <span class="wi cold-temp" ></span> -->
+  <!-- <span class="wi umbrella" ></span> -->
+  <!-- <span class="wi tornado" ></span> -->
+
+<!--   <span class="wi sunny" ></span>
+    <span class="wi sunny-rainy" ></span>
+    <span class="wi overcast" ></span>
+    <span class="wi sunny-cloudy" ></span>
+    <span class="wi raining" ></span>
+    <span class="wi thunder" ></span>
+    <span class="wi cloudy-overcast" ></span>
+    <span class="wi thunder-raining" ></span>
+    <span class="wi snowing" ></span>
+    <span class="wi raining-snowing" ></span>
+    <span class="wi rainbow-cloudy" ></span>
+    <span class="wi very-windy" ></span> -->
