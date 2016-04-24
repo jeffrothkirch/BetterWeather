@@ -39,66 +39,22 @@ def examples():
 def classify():
     links_string=request.form['links']
     links = json.loads(links_string)
+    data = fetch_data(links)
 
-    # clean everything out
-    delete_folder(temp_dir)
-    delete_file(output_file_name)
-
-    # download the links
-    for i,link in enumerate(links):
-        # extension = os.path.splitext(link)[1]
-        extension = 'jpg'
-        urllib.urlretrieve(link, '%s/%s.%s' % (temp_dir, i, extension))
-
-    # zip the images
-    shutil.make_archive(output_file_name, 'zip', temp_dir)
-
-    # make watson requests
-    r = requests.post(url, files={'images_file.zip': open(output_file_name + '.zip', 'rb')}, auth=(BLUEMIX_USERNAME, BLUEMIX_PASSWORD))
-    
-
-    # massage the data back
-    if (r.status_code == 200):
-        data = json.loads(r.text)
-
-        for i, link in enumerate(links):
-            data['images'][i]['image'] = link
-        return jsonify(result=data)
-    # transform them back to links
-    abort(403)
+    return jsonify(result=data)
 
 @app.route('/filter', methods=['POST'])
 def filter():
     links_string=request.form['links']
     links = json.loads(links_string)
+    data = fetch_data(links)
 
-    # clean everything out
-    delete_folder(temp_dir)
-    delete_file(output_file_name)
+    results = []
+    for i, link in enumerate(links):
+        if (is_outdoors(data['images'][i])):
+            results.append(link)
+    return jsonify(result=results)
 
-    # download the links
-    for i,link in enumerate(links):
-        # extension = os.path.splitext(link)[1]
-        extension = 'jpg'
-        urllib.urlretrieve(link, '%s/%s.%s' % (temp_dir, i, extension))
-
-    # zip the images
-    shutil.make_archive(output_file_name, 'zip', temp_dir)
-
-    # make watson requests
-    r = requests.post(url, files={'images_file.zip': open(output_file_name + '.zip', 'rb')}, auth=(BLUEMIX_USERNAME, BLUEMIX_PASSWORD))
-    
-
-    # massage the data back
-    if (r.status_code == 200):
-        data = json.loads(r.text)
-        results = []
-        for i, link in enumerate(links):
-            if (is_outdoors(data['images'][i])):
-                results.append(link)
-        return jsonify(result=results)
-    # transform them back to links
-    abort(403)
 
 def is_outdoors(data_entry):
     # names = ['Outdoors', 'Burning', 'Racquet_Sport', 'Bat_Sport', 'Team_Field_Sport', 'Team_Indoor_Sport', 'Team_Sport', 'Track_and_Field', 'Boating', 'Power_Boating', 'Rowing', 'Swimming', 'Water_Sport', 'Ice_Sport', 'Skiing', 'Snow_Sport', 'Winter_Sport', 'Sports_Field', 'Sports_Track', 'Urban_Scene', 'Nature_Scene', 'Water_Scene', 'Winter_Scene', 'Outdoors', 'Sky_Scene', 'Flower', 'Wild_Fire', 'Earthquake', 'Flood', 'Storm', 'Camping', 'Wedding', 'Concert', 'Adventure_Sport', 'Climbing', 'Land_Sailing', 'Air_Sport', 'Ballooning', 'Hand_Gliding', 'Camel_Racing', 'Dog_Racing', 'Equestrian', 'Horce_Racing', 'Polo', Golf', ;Greco_Roman_Wrestling', 'Mud_Wrestling', 'Cycling', 'Fishing', 'Rollerskating', 'Skateboarding', 'American_Football', 'Football', 'Soccer', 'Rugby', 'Field_Hocky', 'Track', 'Jet_Skiing', 'Crew', 'Sailing', 'Windsurfing', 'Cliff_Diving', 'Sledding', 'Tobagganing', 'Ski_Jumping']
@@ -123,7 +79,41 @@ def delete_file(path):
         os.remove(path)
     except OSError:
         pass
+
+def fetch_data(links):
+    # clean everything out
+    delete_folder(temp_dir)
+    delete_file(output_file_name)
+
+    # download the links
+    for i,link in enumerate(links):
+        # extension = os.path.splitext(link)[1]
+        extension = 'jpg'
+        urllib.urlretrieve(link, '%s/%s.%s' % (temp_dir, i, extension))
+
+    # zip the images
+    shutil.make_archive(output_file_name, 'zip', temp_dir)
+
+    # make watson requests
+    r = requests.post(url, files={'images_file.zip': open(output_file_name + '.zip', 'rb')}, auth=(BLUEMIX_USERNAME, BLUEMIX_PASSWORD))
+    
+
+    # massage the data back
+    if (r.status_code == 200):
+        data = json.loads(r.text)
+
+        for i, link in enumerate(links):
+            j = get_index(data['images'], i)
+            data['images'][j]['image'] = link
+
+        return data
+    # transform them back to links
+    abort(403)
+
+def get_index(entry, i):
+    for j,e in enumerate(entry):
+        if str(e['image']) == "%s.%s" % (i, 'jpg'):
+            return j
+
 if __name__ == '__main__':
     app.run(host='localhost', port=8084, debug=True)
-
-
